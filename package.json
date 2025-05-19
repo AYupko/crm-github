@@ -6,7 +6,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+   "build": "rm -rf dist && tsc -p backend/tsconfig.json && tsc-alias -p backend/tsconfig.json",
+    "dev": "node dist/backend/index.js",
+    "start:dev": "nodemon -L backend/src/index.ts"
   },
   "dependencies": {
     "@prisma/client": "^6.8.2",
