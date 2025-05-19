@@ -1,0 +1,6 @@
+{
+  "watch": ["backend/src"],
+  "ext": "ts",
+  "ignore": ["dist"],
+  "exec": "tsx -r tsconfig-paths/register backend/src/index.ts"
+}
