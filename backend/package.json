@@ -1,0 +1,33 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "rm -rf dist && tsc && tsc-alias",
+    "start:dev": "nodemon -L src/index.ts",
+    "dev": "node dist/index.js",
+    "prisma:generate": "prisma generate --schema src/database/prisma/schema.prisma",
+    "prisma:migrate:apply": "npx prisma migrate dev --schema src/database/prisma/schema.prisma",
+    "prisma:deploy": "prisma migrate deploy --schema src/database/prisma/schema.prisma"
+  },
+  "prisma": {
+    "schema": "src/database/prisma/schema.prisma"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.8.2",
+    "axios": "^1.9.0",
+    "dotenv": "^16.5.0",
+    "fastify": "^5.3.3",
+    "zod": "^3.24.4"
+  },
+  "devDependencies": {
+    "prisma": "^6.8.2",
+    "tsx": "^4.19.4",
+    "tsc-alias": "^1.8.16",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.8.3",
+    "nodemon": "^3.1.10",
+    "@types/node": "^22.15.19"
+  }
+}
