@@ -1,11 +1,11 @@
 import Fastify from "fastify";
-import dotenv from "dotenv";
+import { config } from "dotenv";
 import { configureRoutes } from "./routes";
-import { setFastifyDecorators } from "./decorators";
 import fastifyJwt from "@fastify/jwt";
 import fastifyCookie from "@fastify/cookie";
+import { setFastifyDecorators } from "./plugins";
 
-dotenv.config();
+config();
 
 const fastify = Fastify({
   logger: true,

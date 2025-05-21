@@ -1,9 +1,15 @@
 import bcrypt from "bcrypt";
 
-import { ConflictError } from "@/business/lib";
-import { userRepository } from "@/database/repositories/user/user.repository";
+import { ConflictError, encryptPassword } from "@/business/lib";
+import { userRepository } from "@/database/repositories";
 
-export const signIn = async (email: string, password: string) => {
+const signIn = async ({
+  email,
+  password,
+}: {
+  email: string;
+  password: string;
+}) => {
   const user = await userRepository.findUnique({
     where: { email },
   });
@@ -17,9 +23,40 @@ export const signIn = async (email: string, password: string) => {
     throw new ConflictError("Invalid email or password");
   }
 
-  return user;
+  const { passwordHash, ...safeUser } = user;
+
+  return { safeUser };
+};
+
+const signUp = async ({
+  email,
+  password,
+}: {
+  email: string;
+  password: string;
+}) => {
+  const user = await userRepository.findUnique({
+    where: {
+      email: email,
+    },
+  });
+
+  if (user) {
+    throw new ConflictError("This email is already registered in the system");
+  }
+
+  const hashedPassword = encryptPassword(password);
+
+  const createdUser = await userRepository.create({
+    data: { email, passwordHash: hashedPassword },
+  });
+
+  const { passwordHash, ...safeUser } = createdUser;
+
+  return { safeUser };
 };
 
 export const authService = {
   signIn,
+  signUp,
 };

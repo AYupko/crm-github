@@ -1,5 +1,11 @@
 import { z } from "zod";
 
+const applicationUserSchema = z.object({
+  id: z.string().uuid(),
+  email: z.string().email(),
+  createdAt: z.date(),
+});
+
 const accessTokenJWTPayloadSchema = z.object({
   id: z.string(),
   type: z.literal("access-token"),
@@ -14,13 +20,37 @@ const signUpBodySchema = z.object({
 
 type SignupRequestBody = z.infer<typeof signUpBodySchema>;
 
+const signUpResponseSchema = z.object({
+  user: applicationUserSchema,
+});
+
+type SignupResponse = z.infer<typeof signUpResponseSchema>;
+
 const signInBodySchema = z.object({
   email: z.string().email(),
   password: z.string(),
 });
 
-type SigninRequestBody = z.infer<typeof signInBodySchema>;
+type SignInRequestBody = z.infer<typeof signInBodySchema>;
 
-export { signUpBodySchema, signInBodySchema, accessTokenJWTPayloadSchema };
+const signInResponseSchema = z.object({
+  user: applicationUserSchema,
+});
 
-export type { AccessTokenJWTPayload, SignupRequestBody, SigninRequestBody };
+type SignInResponse = z.infer<typeof signInResponseSchema>;
+
+export {
+  signUpBodySchema,
+  signInBodySchema,
+  accessTokenJWTPayloadSchema,
+  signInResponseSchema,
+  signUpResponseSchema,
+};
+
+export type {
+  AccessTokenJWTPayload,
+  SignupRequestBody,
+  SignInRequestBody,
+  SignInResponse,
+  SignupResponse,
+};

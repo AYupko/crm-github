@@ -2,25 +2,33 @@ import { createToken } from "@/business/lib";
 import { authService } from "@/business/services/auth/auth.service";
 import {
   AccessTokenJWTPayload,
-  SigninRequestBody,
+  SignInRequestBody,
+  SignInResponse,
+  SignupResponse,
 } from "@/schemas/auth.schemas";
 import { FastifyReply, FastifyRequest } from "fastify";
 
 export const signIn = async (
-  request: FastifyRequest<{ Body: SigninRequestBody }>,
+  request: FastifyRequest<{
+    Body: SignInRequestBody;
+  }>,
   reply: FastifyReply
 ) => {
-  const { body } = request;
-  const user = await authService.signIn(body.email, body.password);
+  const { email, password } = request.body;
+  const data = await authService.signIn({ email, password });
 
   const payload: AccessTokenJWTPayload = {
-    id: user.id,
+    id: data.safeUser.id,
     type: "access-token",
   };
 
   const accessToken = createToken(request.server.jwt, payload, {
     expiresIn: "7d",
   });
+
+  const response: SignInResponse = {
+    user: data.safeUser,
+  };
 
   reply
     .setCookie("accessToken", accessToken, {
@@ -32,10 +40,22 @@ export const signIn = async (
       signed: true,
     })
     .code(200)
-    .send({
-      user: {
-        id: user.id,
-        email: user.email,
-      },
-    });
+    .send(response);
+};
+
+export const signUp = async (
+  request: FastifyRequest<{
+    Body: SignInRequestBody;
+  }>,
+  reply: FastifyReply
+) => {
+  const { email, password } = request.body;
+
+  const data = await authService.signUp({ email, password });
+
+  const response: SignupResponse = {
+    user: data.safeUser,
+  };
+
+  return reply.code(201).send(response);
 };
