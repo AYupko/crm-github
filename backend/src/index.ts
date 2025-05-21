@@ -1,5 +1,9 @@
 import Fastify from "fastify";
 import dotenv from "dotenv";
+import { configureRoutes } from "./routes";
+import { setFastifyDecorators } from "./decorators";
+import fastifyJwt from "@fastify/jwt";
+import fastifyCookie from "@fastify/cookie";
 
 dotenv.config();
 
@@ -9,7 +13,17 @@ const fastify = Fastify({
 
 const start = async () => {
   try {
-    // configureRoutes(fastify);
+    fastify.register(fastifyJwt, {
+      secret: process.env.APPLICATION_SECRET || "",
+    });
+
+    fastify.register(fastifyCookie, {
+      secret: process.env.COOKIE_SECRET,
+    });
+
+    setFastifyDecorators(fastify);
+
+    configureRoutes(fastify);
 
     await fastify.listen({
       port: Number(process.env.PORT) || 3000,

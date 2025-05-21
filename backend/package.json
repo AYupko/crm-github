@@ -15,19 +15,23 @@
     "schema": "src/database/prisma/schema.prisma"
   },
   "dependencies": {
+    "@fastify/cookie": "^11.0.2",
+    "@fastify/jwt": "^9.1.0",
     "@prisma/client": "^6.8.2",
     "axios": "^1.9.0",
+    "bcrypt": "^6.0.0",
     "dotenv": "^16.5.0",
     "fastify": "^5.3.3",
     "zod": "^3.24.4"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/node": "^22.15.19",
+    "nodemon": "^3.1.10",
     "prisma": "^6.8.2",
-    "tsx": "^4.19.4",
     "tsc-alias": "^1.8.16",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.8.3",
-    "nodemon": "^3.1.10",
-    "@types/node": "^22.15.19"
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
   }
 }
