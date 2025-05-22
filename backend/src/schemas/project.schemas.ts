@@ -23,6 +23,36 @@ const addProjectResponseSchema = z.object({
 
 type AddProjectResponse = z.infer<typeof addProjectResponseSchema>;
 
-export { addProjectBodySchema, addProjectResponseSchema };
+const getProjectsResponseSchema = z.object({
+  projects: z.array(defaultProjectSchema),
+});
 
-export type { AddProjectBody, AddProjectResponse };
+type GetProjectsResponse = z.infer<typeof getProjectsResponseSchema>;
+
+const projectIdParamsSchema = z.object({
+  id: z.string().uuid(),
+});
+
+type ProjectIdParams = z.infer<typeof projectIdParamsSchema>;
+
+const updateProjectResponseSchema = z.object({
+  project: defaultProjectSchema,
+});
+
+type updateProjectResponse = z.infer<typeof updateProjectResponseSchema>;
+
+export {
+  addProjectBodySchema,
+  addProjectResponseSchema,
+  getProjectsResponseSchema,
+  projectIdParamsSchema,
+  updateProjectResponseSchema,
+};
+
+export type {
+  AddProjectBody,
+  AddProjectResponse,
+  GetProjectsResponse,
+  ProjectIdParams,
+  updateProjectResponse,
+};

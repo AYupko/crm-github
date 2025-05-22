@@ -1,10 +1,18 @@
 import {
   addProjectBodySchema,
   addProjectResponseSchema,
+  getProjectsResponseSchema,
+  projectIdParamsSchema,
+  updateProjectResponseSchema,
 } from "@/schemas/project.schemas";
 import { FastifyInstance } from "fastify";
 import { zodToJsonSchema as $ref } from "zod-to-json-schema";
-import { addProject } from "./project.handlers";
+import {
+  addProject,
+  getUserProjects,
+  removeProject,
+  updateProject,
+} from "./project.handlers";
 
 export const projectRoutes = async (fastify: FastifyInstance) => {
   fastify.post(
@@ -25,19 +33,47 @@ export const projectRoutes = async (fastify: FastifyInstance) => {
     addProject
   );
 
-  // fastify.post(
-  //   "/sign-up",
-  //   {
-  //     preHandler: [async (req, reply) => fastify.notAuthenticated(req, reply)],
-  //     schema: {
-  //       tags: ["auth"],
-  //       body: $ref(signUpBodySchema),
-  //       summary: "Sign up with email and password",
-  //       response: {
-  //         201: $ref(signUpResponseSchema),
-  //       },
-  //     },
-  //   },
-  //   signUp
-  // );
+  fastify.get(
+    "/",
+    {
+      preHandler: [async (req, reply) => fastify.authenticate(req, reply)],
+      schema: {
+        tags: ["project"],
+        summary: "Get saved projects",
+        response: {
+          201: $ref(getProjectsResponseSchema),
+        },
+      },
+    },
+    getUserProjects
+  );
+
+  fastify.delete(
+    "/:id",
+    {
+      preHandler: [async (req, reply) => fastify.authenticate(req, reply)],
+      schema: {
+        tags: ["project"],
+        summary: "Delete saved project by id",
+        params: $ref(projectIdParamsSchema),
+      },
+    },
+    removeProject
+  );
+
+  fastify.put(
+    "/:id",
+    {
+      preHandler: [async (req, reply) => fastify.authenticate(req, reply)],
+      schema: {
+        tags: ["project"],
+        summary: "Update saved project by id",
+        params: $ref(projectIdParamsSchema),
+        response: {
+          200: $ref(updateProjectResponseSchema),
+        },
+      },
+    },
+    updateProject
+  );
 };

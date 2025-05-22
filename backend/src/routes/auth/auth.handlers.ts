@@ -48,9 +48,9 @@ export const signUp = async (
   }>,
   reply: FastifyReply
 ) => {
-  const { email, password } = request.body;
+  const payload = request.body;
 
-  const data = await authService.signUp({ email, password });
+  const data = await authService.signUp(payload);
 
   const response: SignupResponse = {
     user: data.safeUser,
