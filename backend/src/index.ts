@@ -4,6 +4,7 @@ import { configureRoutes } from "./routes";
 import fastifyJwt from "@fastify/jwt";
 import fastifyCookie from "@fastify/cookie";
 import { setFastifyDecorators } from "./plugins";
+import fastifyFormbody from "@fastify/formbody";
 
 config();
 
@@ -20,6 +21,8 @@ const start = async () => {
     fastify.register(fastifyCookie, {
       secret: process.env.COOKIE_SECRET,
     });
+
+    fastify.register(fastifyFormbody);
 
     setFastifyDecorators(fastify);
 

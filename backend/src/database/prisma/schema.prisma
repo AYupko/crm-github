@@ -27,4 +27,6 @@ model Repository {
   createdAt  DateTime
   userId     String
   user       User     @relation(fields: [userId], references: [id])
+
+  @@unique([userId, owner, name])
 }

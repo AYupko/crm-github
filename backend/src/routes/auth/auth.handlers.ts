@@ -1,5 +1,5 @@
 import { createToken } from "@/business/lib";
-import { authService } from "@/business/services/auth/auth.service";
+import { authService } from "@/business/services";
 import {
   AccessTokenJWTPayload,
   SignInRequestBody,
