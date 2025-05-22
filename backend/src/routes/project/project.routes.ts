@@ -18,7 +18,7 @@ export const projectRoutes = async (fastify: FastifyInstance) => {
           "Repository path is expected in format owner/name (e.g. facebook/react)",
         body: $ref(addProjectBodySchema),
         response: {
-          200: $ref(addProjectResponseSchema),
+          201: $ref(addProjectResponseSchema),
         },
       },
     },

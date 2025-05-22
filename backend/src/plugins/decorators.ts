@@ -8,14 +8,7 @@ import { FastifyInstance, FastifyRequest } from "fastify";
 
 const authenticate = async (req: FastifyRequest) => {
   try {
-    const result = req.unsignCookie(req.cookies.accessToken ?? "");
-
-    if (!result.valid) {
-      throw new UnauthorizedError("Invalid token.");
-    }
-
-    const decoded = req.server.jwt.verify<AccessTokenJWTPayload>(result.value);
-
+    const decoded = await req.jwtVerify<AccessTokenJWTPayload>();
     await accessTokenJWTPayloadSchema.parseAsync(decoded);
     await userService.checkUserExists(decoded.id);
   } catch (err) {

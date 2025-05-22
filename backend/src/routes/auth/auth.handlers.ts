@@ -33,11 +33,10 @@ export const signIn = async (
   reply
     .setCookie("accessToken", accessToken, {
       httpOnly: true,
-      secure: true,
+      // secure: true,
       sameSite: "strict",
       path: "/",
       maxAge: 60 * 60 * 24 * 14,
-      signed: true,
     })
     .code(200)
     .send(response);
