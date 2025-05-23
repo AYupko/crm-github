@@ -58,3 +58,7 @@ export const signUp = async (
 
   return reply.code(201).send(response);
 };
+
+export const checkAuth = (request: FastifyRequest, reply: FastifyReply) => {
+  return reply.send(request.user);
+};
