@@ -1,7 +1,7 @@
 import { QueryKeys } from "@/shared/constants";
 import { useQuery } from "@tanstack/react-query";
-import { authService } from "../auth-service";
 import { selectIsAuthorized, userStore } from "@/entities/user";
+import { authService } from "./auth-service";
 
 export const useAuthQuery = () => {
   const isAuthorized = userStore(selectIsAuthorized);
