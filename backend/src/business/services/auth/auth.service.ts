@@ -1,6 +1,8 @@
-import bcrypt from "bcrypt";
-
-import { ConflictError, encryptPassword } from "@/business/lib";
+import {
+  comparePassword,
+  ConflictError,
+  encryptPassword,
+} from "@/business/lib";
 import { userRepository } from "@/database/repositories";
 
 const signIn = async ({
@@ -18,7 +20,7 @@ const signIn = async ({
     throw new ConflictError("Invalid email or password");
   }
 
-  const isMatch = await bcrypt.compare(password, user.passwordHash);
+  const isMatch = comparePassword(password, user.passwordHash);
   if (!isMatch) {
     throw new ConflictError("Invalid email or password");
   }
