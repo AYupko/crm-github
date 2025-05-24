@@ -6,6 +6,7 @@ export interface User {
 
 export interface UserStore {
   user: User | null;
+  isAuthorized: boolean;
   setUser: (user: User) => void;
   logout: () => void;
 }

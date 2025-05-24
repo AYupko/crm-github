@@ -23,8 +23,13 @@ const checkAuth = () => {
   return baseQuery.get<CheckAuthResponse>("auth/me");
 };
 
+const logout = () => {
+  return baseQuery.post("auth/logout");
+};
+
 export const authService = {
   signIn,
   signUp,
   checkAuth,
+  logout,
 };

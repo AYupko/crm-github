@@ -37,6 +37,7 @@ export const signIn = async (
       sameSite: "strict",
       path: "/",
       maxAge: 60 * 60 * 24 * 14,
+      signed: false,
     })
     .code(200)
     .send(response);
@@ -59,6 +60,15 @@ export const signUp = async (
   return reply.code(201).send(response);
 };
 
-export const checkAuth = (request: FastifyRequest, reply: FastifyReply) => {
-  return reply.send(request.user);
+export const checkAuth = (_: FastifyRequest, reply: FastifyReply) => {
+  return reply.code(200).send();
+};
+
+export const logout = (_: FastifyRequest, reply: FastifyReply) => {
+  reply
+    .clearCookie("accessToken", {
+      path: "/",
+    })
+    .code(200)
+    .send();
 };

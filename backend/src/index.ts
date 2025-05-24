@@ -1,10 +1,12 @@
 import Fastify from "fastify";
-import { config } from "dotenv";
-import { configureRoutes } from "./routes";
 import fastifyJwt from "@fastify/jwt";
 import fastifyCookie from "@fastify/cookie";
-import { setFastifyDecorators } from "./plugins";
 import fastifyFormbody from "@fastify/formbody";
+import cors from "@fastify/cors";
+
+import { config } from "dotenv";
+import { configureRoutes } from "./routes";
+import { setFastifyDecorators } from "./plugins";
 
 config();
 
@@ -14,12 +16,21 @@ const fastify = Fastify({
 
 const start = async () => {
   try {
-    fastify.register(fastifyJwt, {
-      secret: process.env.APPLICATION_SECRET || "",
+    await fastify.register(cors, {
+      origin: true,
+      credentials: true,
     });
 
     fastify.register(fastifyCookie, {
       secret: process.env.COOKIE_SECRET,
+    });
+
+    fastify.register(fastifyJwt, {
+      secret: process.env.APPLICATION_SECRET || "",
+      cookie: {
+        cookieName: "accessToken",
+        signed: false,
+      },
     });
 
     fastify.register(fastifyFormbody);

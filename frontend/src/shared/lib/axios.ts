@@ -1,5 +1,6 @@
-import { userStore } from "@/entities/user";
 import axios, { AxiosError } from "axios";
+import { authService } from "../api";
+import { removeUser } from "@/entities/user";
 
 const API_URL = "http://localhost:3000/api";
 
@@ -12,7 +13,9 @@ baseQuery.interceptors.response.use(
   (res) => res,
   (error: AxiosError) => {
     if (error.response?.status === 401) {
-      userStore.getState().logout();
+      console.log("logout user");
+      removeUser();
+      authService.logout();
     }
 
     return Promise.reject(error);

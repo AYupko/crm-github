@@ -1,8 +1,12 @@
 import { create } from "zustand";
-import { UserStore } from "./types";
+import { User, UserStore } from "./types";
 
 export const userStore = create<UserStore>((set) => ({
   user: null,
-  setUser: (user) => set({ user }),
-  logout: () => set({ user: null }),
+  isAuthorized: false,
+
+  setUser: (user: User) => set({ user, isAuthorized: true }),
+  logout: () => set({ user: null, isAuthorized: false }),
 }));
+
+export const selectIsAuthorized = (state: UserStore) => state.isAuthorized;

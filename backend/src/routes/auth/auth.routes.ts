@@ -6,7 +6,7 @@ import {
 } from "@/schemas/auth.schemas";
 import { FastifyInstance } from "fastify";
 import { zodToJsonSchema as $ref } from "zod-to-json-schema";
-import { checkAuth, signIn, signUp } from "./auth.handlers";
+import { checkAuth, logout, signIn, signUp } from "./auth.handlers";
 
 export const authRoutes = async (fastify: FastifyInstance) => {
   fastify.post(
@@ -47,12 +47,22 @@ export const authRoutes = async (fastify: FastifyInstance) => {
       preHandler: [async (req, reply) => fastify.authenticate(req, reply)],
       schema: {
         tags: ["auth"],
-        summary: "Sign up with email and password",
-        response: {
-          201: $ref(signUpResponseSchema),
-        },
+        summary: "Get user auth status",
+        response: 200,
       },
     },
     checkAuth
+  );
+
+  fastify.post(
+    "/logout",
+    {
+      schema: {
+        tags: ["auth"],
+        summary: "Logout user",
+        response: 200,
+      },
+    },
+    logout
   );
 };

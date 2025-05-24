@@ -1,30 +1,29 @@
-import { HomePage } from '@/pages/home/HomePage';
-import { AuthPage } from '@/pages/auth/AuthPage';
-import { createBrowserRouter, RouterProvider } from 'react-router';
-import { AuthLayout, MainLayout } from '@/widgets';
+import { createBrowserRouter, RouterProvider } from "react-router";
+import { AuthLayout, MainLayout } from "@/widgets";
+import { SignInPage, SignUpPage } from "@/pages/auth";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <MainLayout />,
     children: [
       {
         index: true,
-        element: <HomePage />,
+        element: <div>home page</div>,
       },
     ],
   },
   {
-    path: '/auth',
+    path: "/auth",
     element: <AuthLayout />,
     children: [
       {
         index: true,
-        element: <AuthPage mode="signin" />,
+        element: <SignInPage />,
       },
       {
-        path: 'signup',
-        element: <AuthPage mode="signup" />,
+        path: "signup",
+        element: <SignUpPage />,
       },
     ],
   },
