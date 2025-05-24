@@ -4,7 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema, LoginValues } from "./schema";
 import { Button, Form, FormError, Input, Label } from "@/shared/ui";
 import { useSignIn } from "@/shared/api";
-import { useNavigate } from "react-router";
 
 export const LoginForm = () => {
   const {
@@ -25,13 +24,13 @@ export const LoginForm = () => {
     <Form onSubmit={handleSubmit(onSubmit)}>
       <div>
         <Label htmlFor="email">Email</Label>
-        <Input id="email" type="email" {...register("email")} />
+        <Input id="email" type="email" {...register("email")} placeholder="Enter your email" />
         <FormError message={errors.email?.message} />
       </div>
 
       <div>
         <Label htmlFor="password">Password</Label>
-        <Input id="password" type="password" {...register("password")} />
+        <Input id="password" type="password" {...register("password")} placeholder="Enter your password" />
         <FormError message={errors.password?.message} />
       </div>
 

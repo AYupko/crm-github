@@ -1,0 +1,22 @@
+.authLayout {
+  background-color: #f9f9f9;
+  background-image: radial-gradient(#dcdcdc 1px, transparent 1px);
+  background-size: 24px 24px;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 470px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  border: 1px solid #ddd;
+  border-radius: 16px;
+  background-color: #fff;
+  padding: 24px;
+}

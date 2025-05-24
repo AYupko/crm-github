@@ -10,6 +10,7 @@ export const SignUpForm = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<SignupValues>({
     resolver: zodResolver(signupSchema),
   });
@@ -19,6 +20,7 @@ export const SignUpForm = () => {
   const onSubmit = (data: SignupValues) => {
     console.log("Sign up data:", data);
     signUp(data);
+    reset();
   };
 
   return (
