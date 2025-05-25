@@ -18,7 +18,6 @@ export const SignUpForm = () => {
   const { mutate: signUp, isPending } = useSignUp();
 
   const onSubmit = (data: SignupValues) => {
-    console.log("Sign up data:", data);
     signUp(data);
     reset();
   };

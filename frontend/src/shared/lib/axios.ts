@@ -1,6 +1,5 @@
 import axios, { AxiosError } from "axios";
 import { authService } from "../api";
-import { removeUser } from "@/entities/user";
 
 const API_URL = "http://localhost:3000/api";
 
@@ -13,8 +12,7 @@ baseQuery.interceptors.response.use(
   (res) => res,
   (error: AxiosError) => {
     if (error.response?.status === 401) {
-      console.log("logout user");
-      removeUser();
+      console.log("logout triggered");
       authService.logout();
     }
 

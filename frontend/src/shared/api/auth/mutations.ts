@@ -3,7 +3,6 @@ import { useMutation } from "@tanstack/react-query";
 import { SignInRequest, SignUpRequest } from "./types";
 import { authService } from "./auth-service";
 import { useNavigate } from "react-router";
-import { setUser, User } from "@/entities/user";
 
 export const useSignIn = () => {
   const navigate = useNavigate();
@@ -15,8 +14,7 @@ export const useSignIn = () => {
 
       return response.data.user;
     },
-    onSuccess: async (user: User) => {
-      setUser(user);
+    onSuccess: async () => {
       navigate("/");
     },
   });

@@ -19,6 +19,7 @@ const start = async () => {
     await fastify.register(cors, {
       origin: true,
       credentials: true,
+      methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     });
 
     fastify.register(fastifyCookie, {
