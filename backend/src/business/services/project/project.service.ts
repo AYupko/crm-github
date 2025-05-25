@@ -2,7 +2,6 @@ import {
   ConflictError,
   getProjectByPath,
   InternalServerError,
-  NotFoundError,
 } from "@/business/lib";
 import { projectRepository } from "@/database/repositories/project";
 

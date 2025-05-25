@@ -8,7 +8,7 @@ export const SignInPage = () => {
       <p>Enter in system by typing your details</p>
       <LoginForm />
       <p>
-        Don't have account yet? <NavLink to="./signup">Sign up</NavLink>
+        Don&apos;t have account yet? <NavLink to="./signup">Sign up</NavLink>
       </p>
     </>
   );
