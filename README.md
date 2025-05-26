@@ -9,7 +9,7 @@ GitHub CRM is a full-stack web application that allows users to authenticate, co
 - User authentication (sign up, sign in, sign out)
 - Cookie-based session management
 - Backend API built with Fastify, Zod, and Prisma
-- 🗃PostgreSQL database integration
+- PostgreSQL database integration
 - Project management and GitHub repository import
 - Modular frontend architecture with FSD structure
 - React Query setup for frontend data fetching
