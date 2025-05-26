@@ -34,7 +34,7 @@ GitHub CRM is a full-stack web application that allows users to authenticate, co
 1. Clone the repository
 ```bash
 git clone https://github.com/AYupko/crm-github.git
-cd github-crm
+cd crm-github
 ```
 
 2. In Backend folder create your `.env` based on `.env.example` file.
