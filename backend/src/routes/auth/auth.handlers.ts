@@ -60,10 +60,6 @@ export const signUp = async (
   return reply.code(201).send(response);
 };
 
-export const checkAuth = (request: FastifyRequest, reply: FastifyReply) => {
-  return reply.code(200).send({ user: request.user });
-};
-
 export const logout = (_: FastifyRequest, reply: FastifyReply) => {
   reply
     .clearCookie("accessToken", {

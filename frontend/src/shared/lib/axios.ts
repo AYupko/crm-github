@@ -1,5 +1,6 @@
 import axios, { AxiosError } from "axios";
 import { authService } from "../api";
+import { redirectToLogin } from "./navigation";
 
 const API_URL = "http://localhost:3000/api";
 
@@ -13,6 +14,7 @@ baseQuery.interceptors.response.use(
   (error: AxiosError) => {
     if (error.response?.status === 401) {
       authService.logout();
+      redirectToLogin();
     }
 
     return Promise.reject(error);

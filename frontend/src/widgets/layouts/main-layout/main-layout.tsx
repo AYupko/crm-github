@@ -1,16 +1,14 @@
-import { useAuthQuery } from "@/shared/api";
-import { Navigate, Outlet } from "react-router";
+import { Outlet, useNavigate } from "react-router";
 import styles from "./main-layout.module.css";
-import { Loader } from "@/shared/ui/loader";
+import { useEffect } from "react";
+import { setNavigator } from "@/shared/lib";
 
 export const MainLayout = () => {
-  const { data, isLoading } = useAuthQuery();
+  const navigate = useNavigate();
 
-  if (isLoading) return <Loader />;
-
-  if (!data) {
-    return <Navigate to="/auth" replace />;
-  }
+  useEffect(() => {
+    setNavigator(navigate);
+  }, [navigate]);
 
   return (
     <main className={styles.container}>

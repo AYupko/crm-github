@@ -18,14 +18,9 @@ type SignUpResponse = {
   user: User;
 };
 
-type CheckAuthResponse = {
-  user: User;
-};
-
 export type {
   SignInRequest,
   SignInResponse,
   SignUpRequest,
   SignUpResponse,
-  CheckAuthResponse,
 };

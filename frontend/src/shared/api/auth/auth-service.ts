@@ -1,6 +1,5 @@
 import { baseQuery } from "@/shared/lib";
 import {
-  CheckAuthResponse,
   SignInRequest,
   SignInResponse,
   SignUpRequest,
@@ -19,10 +18,6 @@ const signUp = (params: SignUpRequest) => {
   });
 };
 
-const checkAuth = () => {
-  return baseQuery.get<CheckAuthResponse>("auth/me");
-};
-
 const logout = () => {
   return baseQuery.post("auth/logout");
 };
@@ -30,6 +25,5 @@ const logout = () => {
 export const authService = {
   signIn,
   signUp,
-  checkAuth,
   logout,
 };
